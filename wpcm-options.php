@@ -90,8 +90,8 @@ function wpcm_dash_page() {
 	global $composer_launcher;
 	$output      = array();
 	$http_method = $_SERVER['REQUEST_METHOD'];
-	echo $http_method;
-	d( $_REQUEST );
+//	echo $http_method;
+//	d( $_REQUEST );
 	$action = $_REQUEST['action'];
 	if ( ! empty( $action ) ) {
 		switch ( $action ) {
