@@ -52,7 +52,7 @@ By now, allows you to view the contents of composer.json, update the plugins tha
 * First version
 
 = 0.1 =
-* Pushed to githun
+* Pushed to github
 
 
 == Upgrade Notice ==
