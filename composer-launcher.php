@@ -1,6 +1,8 @@
 <?php
 
-require_once "phar:///" . __DIR__ . "/composer.phar/src/bootstrap.php";
+if (composerPharExists())
+	include_once "phar:///" . __DIR__ . "/composer.phar/src/bootstrap.php";
+else throw new \RuntimeException("Composer.phar is not present !");
 
 use Composer\Command\ScriptAliasCommand;
 use Composer\Composer;
