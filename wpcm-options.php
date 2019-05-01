@@ -76,7 +76,7 @@ function homeExists() {
 }
 
 function absolute_path( $path ) {
-	if ( ! file_exists( $absolute_path ) || ! is_dir( $absolute_path ) ) {
+	if ( ! file_exists( $path ) || ! is_dir( $path ) ) {
 		return ABSPATH . '/' . $path;
 	} else {
 		return $path;

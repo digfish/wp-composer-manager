@@ -77,8 +77,9 @@ echo "</FORM>";
 
 <div id="dialog-message" class="dialog" style="" title="">
     <p>
-    <p>Composer working<span class="reticences"></span></p>
-    <p>please wait<span class="reticences"></span></p>
+    <p>Composer working<span class="reticences">...</span></p>
+    <p>please wait<span class="reticences">...</span></p>
+    <img src="<?= plugins_url('assets/ajax-loader.gif',__FILE__) ?>">
     <!-- <textarea id="composerOutput" style='font-family: monospace; overflow: scroll ; width: 100%' ></textarea> -->
     </p>
 </div>
@@ -113,7 +114,7 @@ echo "</FORM>";
     function submitActionDialog() {
         $('#dialog-message').dialog();
         //$(this).submit();
-        setInterval(waitingForComposerDialog, 1000);
+        //setInterval(waitingForComposerDialog, 1000);
         return true;
     }
 
@@ -123,10 +124,22 @@ echo "</FORM>";
         $('#search-composer-dialog').dialog().data('project_to_check', arrayPairs['project_to_check']);
     }
 
+    function waitingForComposerDialog() {
+       // jQuery('#dialog-message .reticences').append('.');
+    }
+
     $ = jQuery;
 
     $(function () {
         $('.dialog').hide();
+
+        $(document).ajaxSend(function (evt) {
+            console.log('Fired ajaxSend!');
+            submitActionDialog();
+        }).ajaxStop(function (evt) {
+            console.log('AjaxStop!');
+            $('#dialog-message').dialog('close');
+        });
 
         $('form').submit(function (evt) {
             // $('#dialog-message').dialog();
@@ -187,6 +200,9 @@ echo "</FORM>";
                         console.log(clickedItem);
                         var project_to_check = $('#search-composer-dialog').data('project_to_check');
                         $('.above-results').html("Selected " + clickedItem + " to add! <A href='?page=wpcm&action=require&path=" + project_to_check + "&package=" + clickedItem + "'>Click here to require it</A>");
+                        $('.above-results a').on('click',function(evt) {
+                            submitActionDialog();
+                        });
                     });
                 });
         });
@@ -231,9 +247,6 @@ echo "</FORM>";
             });
     }
 
-    function waitingForComposerDialog() {
-        jQuery('#dialog-message .reticences').append('.');
-    }
 
     function ajax_query_composer_output() {
         jQuery.get(ajaxurl + '?action=query_composer_launcher_output',

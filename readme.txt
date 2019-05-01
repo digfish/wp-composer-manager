@@ -48,15 +48,18 @@ By now, allows you to view the contents of composer.json, update the plugins tha
 
 == Changelog ==
 
-= 0.0.1 =
-* First version
+= 0.2 =
+* Implemented SystemComposerLauncher to interact with an already installed local instance of composer instead of using  composer.phar
 
 = 0.1 =
 * Pushed to github
+
+= 0.0.1 =
+* First version
+
 
 
 == Upgrade Notice ==
 
 = 0.1 =
 First version. Not applicable.
-
